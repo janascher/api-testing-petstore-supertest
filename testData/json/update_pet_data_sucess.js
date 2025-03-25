@@ -1,0 +1,92 @@
+module.exports.array = [
+  {
+    petName: 'Bolt',
+    idPet: 173812102,
+    categoryName: 'Cão',
+    idCategory: 1,
+  },
+  {
+    petName: 'Spike',
+    idPet: 173812103,
+    categoryName: 'Cão',
+    idCategory: 1,
+  },
+  {
+    petName: 'Bichento',
+    idPet: 173812104,
+    categoryName: 'Gato',
+    idCategory: 2,
+  },
+  {
+    petName: 'Nemo',
+    idPet: 173812105,
+    categoryName: 'Peixe',
+    idCategory: 3,
+  },
+  {
+    petName: 'Zazu',
+    idPet: 173812106,
+    categoryName: 'Pássaro',
+    idCategory: 4,
+  },
+  {
+    petName: 'Max',
+    idPet: 173812107,
+    categoryName: 'Cão',
+    idCategory: 1,
+  },
+  {
+    petName: 'Luna',
+    idPet: 173812108,
+    categoryName: 'Gato',
+    idCategory: 2,
+  },
+  {
+    petName: 'Dory',
+    idPet: 173812109,
+    categoryName: 'Peixe',
+    idCategory: 3,
+  },
+  {
+    petName: 'Polly',
+    idPet: 173812110,
+    categoryName: 'Pássaro',
+    idCategory: 4,
+  },
+  {
+    petName: 'Charlie',
+    idPet: 173812111,
+    categoryName: 'Coelho',
+    idCategory: 5,
+  },
+  {
+    petName: 'Bella',
+    idPet: 173812112,
+    categoryName: 'Cão',
+    idCategory: 1,
+  },
+  {
+    petName: 'Simba',
+    idPet: 173812113,
+    categoryName: 'Leão',
+    idCategory: 6,
+  },
+  {
+    petName: 'Fluffy',
+    idPet: 173812114,
+    categoryName: 'Hamster',
+    idCategory: 7,
+  },
+  {
+    petName: 'Rocky',
+    idPet: 173812115,
+    categoryName: 'Tartaruga',
+    idCategory: 8,
+  },
+  {
+    petName: 'Milo',
+    idPet: 173812116,
+    categoryName: 'Cão',
+    idCategory: 1,
+  },
+];
