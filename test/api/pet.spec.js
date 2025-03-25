@@ -40,8 +40,8 @@ describe('API PetStore Swagger - Entidade Pet', () => {
   it('DELETE Pet', async () => {
     const res = await request.delete(`/pet/${petId}`);
 
-    expect(200).toEqual(res.statusCode);
-    expect(200).toEqual(res.body.code);
+    expect(200).toBe(res.statusCode);
+    expect(200).toBe(res.body.code);
     expect(petId.toString()).toBe(res.body.message);
   });
 });
