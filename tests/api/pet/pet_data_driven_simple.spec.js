@@ -19,18 +19,18 @@ describe('API PetStore - Data Driven - CRUD da Entidade Pet', () => {
     async (idPet, petName, idCategory, categoryName, idTags, petTagsName, petStatus) => {
       // O '%s' faz referência ao primeiro elemento
 
-      // Carrega um payload padrão (example.json) e personaliza-o com os dados fornecidos
-      const payload = require('../../fixtures/simpleData/pet/example.json');
-      payload.id = idPet;
-      payload.name = petName;
-      payload.category.id = idCategory;
-      payload.category.name = categoryName;
-      payload.tags.id = idTags;
-      payload.tags.name = petTagsName;
-      payload.status = petStatus;
+      // Carrega um petData padrão (example.json) e personaliza-o com os dados fornecidos
+      const petData = require('../../fixtures/simpleData/pet/example.json');
+      petData.id = idPet;
+      petData.name = petName;
+      petData.category.id = idCategory;
+      petData.category.name = categoryName;
+      petData.tags.id = idTags;
+      petData.tags.name = petTagsName;
+      petData.status = petStatus;
 
       // Envia uma requisição POST para criar o pet
-      const res = await request.post('/pet').send(payload);
+      const res = await request.post('/pet').send(petData);
 
       // Valida da resposta
       expect(res.statusCode).toBe(200);
@@ -58,10 +58,10 @@ describe('API PetStore - Data Driven - CRUD da Entidade Pet', () => {
         console.log(`Erro ao verificar pet ${idPet}: ${error}`);
       }
 
-      const payload = require('../../fixtures/simpleData/pet/example.json');
-      payload.id = idPet;
-      payload.name = petName;
-      payload.status = petStatus;
+      const petData = require('../../fixtures/simpleData/pet/example.json');
+      petData.id = idPet;
+      petData.name = petName;
+      petData.status = petStatus;
 
       // Envia uma requisição GET para obter o pet
       const res = await request.get(`/pet/${idPet}`).set('api_key', 'special-key');
@@ -87,18 +87,18 @@ describe('API PetStore - Data Driven - CRUD da Entidade Pet', () => {
   )(
     'PUT Pet -  Deve atualizar os dados de um pet existente com sucesso: %s, %s',
     async (idPet, petName, idCategory, categoryName, idTags, petTagsName, petStatus) => {
-      // Carrega um payload padrão e personaliza-o com os novos dados
-      const payload = require('../../fixtures/simpleData/pet/example.json');
-      payload.id = idPet;
-      payload.name = petName;
-      payload.category.id = idCategory;
-      payload.category.name = categoryName;
-      payload.tags.id = idTags;
-      payload.tags.name = petTagsName;
-      payload.status = petStatus;
+      // Carrega um petData padrão e personaliza-o com os novos dados
+      const petData = require('../../fixtures/simpleData/pet/example.json');
+      petData.id = idPet;
+      petData.name = petName;
+      petData.category.id = idCategory;
+      petData.category.name = categoryName;
+      petData.tags.id = idTags;
+      petData.tags.name = petTagsName;
+      petData.status = petStatus;
 
       // Envia uma requisição PUT para atualizar o pet
-      const res = await request.put('/pet').send(payload).set('api_key', 'special-key');
+      const res = await request.put('/pet').send(petData).set('api_key', 'special-key');
 
       // Valida a resposta
       expect(res.statusCode).toBe(200);
@@ -121,9 +121,9 @@ describe('API PetStore - Data Driven - CRUD da Entidade Pet', () => {
         console.log(`Erro ao verificar pet ${idPet}: ${error}`);
       }
 
-      const payload = require('../../fixtures/simpleData/pet/example.json');
-      payload.id = idPet;
-      payload.name = petName;
+      const petData = require('../../fixtures/simpleData/pet/example.json');
+      petData.id = idPet;
+      petData.name = petName;
 
       // Envia uma requisição DELETE para remover o pet
       const res = await request.delete(`/pet/${idPet}`).set('api_key', 'special-key');
