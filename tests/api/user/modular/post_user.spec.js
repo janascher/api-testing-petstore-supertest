@@ -1,5 +1,7 @@
+jest.setTimeout(90000);
 const request = require('../../../utils/apiClient');
-const createUserDataPath = require('../../../fixtures/dataDriven/user/json/create_user_data_sucess');
+const createUserDataPath = require('../../../fixtures/dataDriven/user/json/POST/create_user_data_sucess');
+const { cleanupUsers } = require('../../../utils/cleanupUtils');
 
 describe('API PetStore - DDT - POST User', () => {
   const testData = createUserDataPath.array;
@@ -30,21 +32,18 @@ describe('API PetStore - DDT - POST User', () => {
         userStatus,
       };
 
-      try {
-        // Realiza a requisição POST para criar o usuário
-        const res = await request.post('/user').send(userData);
+      // Realiza a requisição POST para criar o usuário
+      const res = await request.post('/user').send(userData);
 
-        // Validação da resposta
-        expect(res.statusCode).toBe(200);
-        expect(res.body.type).toBe('unknown');
-        expect(res.body.message).toBe(idName.toString());
-
-        // Exclui o usuário após o teste, independentemente do resultado
-        await request.delete(`/user/${username}`).expect(200);
-      } catch (error) {
-        // Captura e loga erros inesperados durante as operações da API
-        console.log(`Erro ao excluir usuário ${username}: ${error}`);
-      }
+      // Validação da resposta
+      expect(res.statusCode).toBe(200);
+      expect(res.body.type).toBe('unknown');
+      expect(res.body.message).toBe(idName.toString());
     }
   );
+
+  // Limpeza dos usuários criados após os testes
+  afterAll(async () => {
+    await cleanupUsers(testData.map((user) => user.username));
+  });
 });

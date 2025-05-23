@@ -1,0 +1,32 @@
+module.exports.array = [
+  {
+    idName: 7488163,
+    username: 'vanessa.moura',
+    firstName: 'Vanessa',
+    lastName: 'Moura',
+    email: 'vanessa.moura@teste.com',
+    password: 'V@nMoura!23',
+    phone: '21990001112',
+    userStatus: 1,
+  },
+  {
+    idName: 7488164,
+    username: 'julio.felipe',
+    firstName: 'Júlio',
+    lastName: 'Felipe',
+    email: 'julio.felipe@teste.com',
+    password: 'JuF3lipe#2024',
+    phone: '21991112223',
+    userStatus: 1,
+  },
+  {
+    idName: 7488165,
+    username: 'natalia.paz',
+    firstName: 'Natália',
+    lastName: 'Paz',
+    email: 'natalia.paz@teste.com',
+    password: 'N@taP@z2024',
+    phone: '21992223334',
+    userStatus: 1,
+  },
+];

@@ -1,39 +1,44 @@
+jest.setTimeout(90000);
 const request = require('../../../utils/apiClient');
-const createUserDataPath = require('../../../fixtures/dataDriven/user/json/create_user_data_sucess');
+const createUserDataPath = require('../../../fixtures/dataDriven/user/json/DELETE/create_user_data_sucess');
+const { waitForUser } = require('../../../utils/userWaitUtils');
+const { setupUsers } = require('../../../utils/setupUsers');
 
-describe('API PetStore - DELETE User', () => {
+describe('API PetStore - DDT - DELETE User', () => {
   const testData = createUserDataPath.array;
 
-  it.each(testData.map((user) => [user.idName, user.username]))(
-    'DELETE User - Deve remover o usuário com sucesso: %s, %s',
+  // Cria todos os usuários antes de rodar os testes
+  beforeAll(async () => {
+    await setupUsers(testData);
+  });
+
+  it.each(testData.map((user) => [user.username]))(
+    'DELETE User - Deve deletar o usuário com sucesso: %s',
     async (username) => {
-      // Localiza o usuário nos dados de teste
-      const userData = testData.find((user) => user.username === username);
+      await waitForUser(username);
 
-      if (!userData) {
-        console.log(`DELETE - Usuário ${username} não encontrado`);
-        return;
-      }
+      const deleteRes = await request.delete(`/user/${username}`);
+      // Validação da resposta
+      expect(deleteRes.statusCode).toBe(200);
 
-      try {
-        // Cria o usuário antes de excluir
-        await request.post('/user').send(userData).expect(200);
-
-        // Realiza a exclusão do usuário
-        const res = await request.delete(`/user/${username}`).expect(200);
-
-        // Validação da resposta
-        expect(res.statusCode).toBe(200);
-        expect(res.body.type).toBe('unknown');
-        expect(res.body.message).toBe(username);
-
-        // Verifica se o usuário foi realmente excluído
-        const getRes = await request.get(`/user/${username}`);
-        expect(getRes.statusCode).toBe(404);
-      } catch (error) {
-        // Captura e loga erros inesperados durante as operações da API
-        console.error(`Erro ao processar DELETE para usuário ${username}:`, error);
-      }
-    }
+      const getRes = await request.get(`/user/${username}`);
+      // Validação da resposta
+      expect(getRes.statusCode).toBe(404);
+    },
+    40000
   );
+
+  it('DELETE User - Deve retornar 404 ao tentar deletar um usuário inexistente', async () => {
+    const nonExistentUsername = 'usuario_inexistente_42342';
+    const deleteRes = await request.delete(`/user/${nonExistentUsername}`);
+    // Validação da resposta
+    expect(deleteRes.statusCode).toBe(404);
+  });
+
+  it('DELETE User - Deve retornar 400 ao tentar deletar um username inválido', async () => {
+    const invalidUsername = '[]';
+    const deleteRes = await request.delete(`/user/${invalidUsername}`);
+    // Validação da resposta
+    expect(deleteRes.statusCode).toBe(400);
+  });
 });

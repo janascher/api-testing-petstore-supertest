@@ -1,10 +1,18 @@
 {
   "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
     "jest": "^29.7.0",
     "supertest": "^7.0.0"
   },
   "scripts": {
     "test": "jest",
-    "test:sequencial": "jest --runInBand"
+    "test:sequential": "jest --runInBand",
+    "test:detectOpenHandles": "hest --detectOpenHandles",
+    "test:user": "jest tests/api/user/modular",
+    "test:userSequential": "jest --runInBand --verbose tests/api/user/modular",
+    "test:post": "jest --runInBand tests/api/user/modular/post_user.spec.js",
+    "test:get": "jest --runInBand tests/api/user/modular/get_user.spec.js",
+    "test:put": "jest --runInBand tests/api/user/modular/put_user.spec.js",
+    "test:delete": "jest --runInBand tests/api/user/modular/delete_user.spec.js"
   }
 }
